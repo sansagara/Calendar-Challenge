@@ -5,9 +5,14 @@
   <title>Leonel Calendar Challenge</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
   <script src="js/calendar.js"></script>
   <script src="js/d3.js"></script>
   <script src="js/jquery.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/transition.js"></script>
+  <script src="js/collapse.js"></script>
+  <script src="js/bootstrap-datetimepicker.js"></script>
   <script src="js/index.js"></script>
 </head>
 <body>
@@ -23,8 +28,21 @@
                 <form id="createTables">
                     <div class="form-group">
                         <label for="date">Start Date</label>
-                        <input type="text" id="date" class="form-control" required="required">
+                        <div class='input-group date' id='datetimepicker1'>
+	                        <input type="text" id="date" class="form-control" required="required">
+	                        <span class="input-group-addon">
+	                        	<span class="glyphicon glyphicon-calendar"></span>
+	                    	</span>
+	                    </div>
                     </div>
+
+                    <script type="text/javascript">
+			            $(function () {
+			                $('#datetimepicker1').datetimepicker({
+			                	format: 'YYYY-MM-DD'
+			                });
+			            });
+			        </script>
 
                     <div class="form-group">
                         <label for="days">Number of Days</label>
