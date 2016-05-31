@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Leonel Calendar Challenge</title>
+  <link rel="stylesheet" href="css/index.css"/>
+  <script src="js/calendar.js"></script>
+  <script src="js/d3.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body>
+
+<table id="calendar"></table>
+
+<script>
+	var numDays = 100;
+
+	var year = 2016;
+	var month = 4;
+	var day = 31;
+
+	var country = "US";
+
+	var startDate = new Date(year, month, day, 0, 0, 0, 0);
+
+	console.log("startDate: " + startDate);
+	console.log("numDays: " + numDays);
+	console.log("country: " + country);
+
+	showCalendars(startDate, numDays, country);
+</script>
+
+</body>
+</html>

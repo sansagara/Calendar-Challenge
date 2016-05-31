@@ -1,0 +1,28 @@
+#calendar {
+  width: 600px;
+  border-collapse: collapse;
+}
+
+#calendar tbody td {
+  border: 1px solid black;
+  text-align: right;
+  vertical-align: top;
+  width: 14%;
+}
+
+/* Styles for the day boxes, in order of importance */
+#calendar td.weekday {
+   background-color: LightGreen;
+}
+
+#calendar td.weekend {
+  background-color: yellow;
+}
+
+#calendar td.holiday {
+  background-color: orange;
+}
+
+#calendar td.invalid {
+   background-color: LightGray;
+}
