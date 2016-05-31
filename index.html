@@ -3,6 +3,7 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>Leonel Calendar Challenge</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css"/>
   <script src="js/calendar.js"></script>
   <script src="js/d3.js"></script>
@@ -11,9 +12,46 @@
 </head>
 <body>
 
-<table id="calendar"></table>
+<div class="container">
+
+        <h1>Formulario</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-7">
+                
+                <form>
+                    <div class="form-group">
+                        <label for="date">Start Date</label>
+                        <input type="text" id="date" class="form-control" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="days">Number of Days</label>
+                        <input type="number" id="days" class="form-control" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country Code</label>
+                        <input type="text" id="country" class="form-control" required="required">
+                    </div>
+
+                    <button id="createTables" class="btn btn-primary"> Guardar</button>
+                </form>            
+
+            </div>
+
+        </div>
+
+
+    <hr>
+	<table id="calendar"></table>
+
+</div>
 
 <script>
+ $('#createTables').click(function(){
+
 	var numDays = 100;
 
 	var year = 2016;
@@ -21,6 +59,13 @@
 	var day = 31;
 
 	var country = "US";
+	
+	var allowedCountries = ["BE", "BG", "BR", "CA", "CZ", "DE", "ES", "FR", "GB", "GT", "HR", "IT", "NL", "NO", "PL", "SI", "SK", "US"];
+
+	if ($.inArray(country, allowedCountries) < 0) {
+		alert("Country code not supported by holidayapi");
+	}
+
 
 	var startDate = new Date(year, month, day, 0, 0, 0, 0);
 
@@ -29,6 +74,7 @@
 	console.log("country: " + country);
 
 	showCalendars(startDate, numDays, country);
+});
 </script>
 
 </body>
