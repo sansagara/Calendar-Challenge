@@ -83,7 +83,7 @@ function showEvents(country, year, month) {
 
 	 $.ajax({
         url: 'http://holidayapi.com/v1/holidays?country=' + country + '&year=' + year + '&month=' + month,
-        type: 'post',
+        type: 'get',
         dataType: 'json',
         success: function (data) {
         	
