@@ -43,7 +43,8 @@ function showCalendars(startDate, numDays, country) {
 		  .append('td')
 		  .attr('colspan', 7)
 		  .style('text-align', 'center')
-		  .text(consts.monthNames[month]);
+		  .style('font-weight', 'bold')
+		  .text(consts.monthNames[month] + " " + year);
 
 		//Create the header for the day names.
 		header
@@ -106,11 +107,14 @@ function showEvents(country, year, month) {
         	$(data.holidays).each(function(i, holiday) {
 			    console.log('Got holidayapi for month '+ month + ' data: ' + holiday.name + ' on ' + holiday.date);
 			    //Set the class and title to matchind tds.
-		    	$("#row-"+ holiday.date).attr('title', holiday.name);
+		    	$("#row-"+ holiday.date).attr('title', holiday.name + ' (' + country + ')');
 				$("#row-"+ holiday.date).attr('class', 'holiday');
 
 			})
         },
+        error: function (jqXHR, textStatus, errorThrown) {
+        		console.log('ERROR - holidayapi returned error: '+ textStatus + ". Is country code valid?");
+        }
     });
  }
 

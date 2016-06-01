@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css"/>
   <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
+  <link rel="stylesheet" href="css/sweetalert.css">
   <script src="js/calendar.js"></script>
   <script src="js/d3.js"></script>
   <script src="js/jquery.js"></script>
@@ -13,13 +14,14 @@
   <script src="js/transition.js"></script>
   <script src="js/collapse.js"></script>
   <script src="js/bootstrap-datetimepicker.js"></script>
+  <script src="js/sweetalert.min.js"></script>
   <script src="js/index.js"></script>
 </head>
 <body>
 
 <div class="container">
 
-        <h1>Formulario</h1>
+        <h1>Create calendar</h1>
         <hr>
 
         <div class="row">
@@ -69,25 +71,40 @@
 
 <script>
  $('#createTables').submit(function(e){
+ 	//prevent default submit.
  	e.preventDefault();
+ 	//empty the div ()
+ 	$("#calendar").empty();
 
+ 	//get values from inputs.
  	var date = $('#date').val().split("-");;
 	var days = $('#days').val();
 	var country = $('#country').val();
 
-
+	//Hardcoded an array of valid country codes on holidayapi.com as of June, 2016
 	var allowedCountries = ["BE", "BG", "BR", "CA", "CZ", "DE", "ES", "FR", "GB", "GT", "HR", "IT", "NL", "NO", "PL", "SI", "SK", "US"];
 	if ($.inArray(country, allowedCountries) < 0) {
-		alert("Country code not supported by holidayapi. Holidays will not be displayed!");
-		//For now, i'm rendering the calendar even if the country is invalid. If this is not desired, just uncomment next line.
-		//return;
+		//alert("Country code not supported by holidayapi. Holidays will not be displayed!");
+		//swal is a nice alert library.
+		swal({   
+			title: "Country not supported",   
+			text: "The country you entered is not supported on holidayapi service!. Do you want to render it anyway?",   
+			type: "warning",   
+			showCancelButton: true, 
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Render without holidays",   
+			closeOnConfirm: false 
+		}, function(){   
+			//Alert the user that calendars will not have holidays rendered.
+			//swal("Rendering!", "Showing the calendars without holidays.", "success");
+			swal({   title: "Rendering!",   text: "Showing the calendars without holidays.",   timer: 2000,   showConfirmButton: false });
+			showCalendars(new Date(date[0], date[1] - 1, date[2]), days, country);
+		});
+	} else {
+		//No problem, show calendars!
+		showCalendars(new Date(date[0], date[1] - 1, date[2]), days, country);
 	}
-
-	console.log("date: " + date);
-	console.log("days: " + days);
-	console.log("country: " + country);
-
-	showCalendars(new Date(date[0], date[1] - 1, date[2]), days, country);
+	
 });
 </script>
 
