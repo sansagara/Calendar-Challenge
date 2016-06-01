@@ -15,16 +15,18 @@ function showCalendars(startDate, numDays, country) {
 	//Select the calendar div on the HTML.
 	var table = d3.select('#calendar');
 
-	//Do this for the number of months the days will span.
+	//For the number of months the days will span.
 	for (i=0; i<13; i++) {
 
 		var cal = new Calendar();
 		var weeks = cal.monthDays(year, month);
 
+		//Append the table header, body and some space after.
 		var header = table.append('thead');
 		var body = table.append('tbody');
 		var spacer = table.append('br');
 
+		//Create the header for the month name.
 		header
 		  .append('tr')
 		  .append('td')
@@ -32,6 +34,7 @@ function showCalendars(startDate, numDays, country) {
 		  .style('text-align', 'center')
 		  .text(consts.monthNames[month]);
 
+		//Create the header for the day names.
 		header
 		  .append('tr')
 		  .selectAll('td')
@@ -43,6 +46,7 @@ function showCalendars(startDate, numDays, country) {
 		    return d;
 		  });
 
+		//Create the calendar days. This loops each week array, which contains 7 ints, representing the day of the month.
 		var dayNumber = 0;
 		weeks.forEach(function (week) {
 		  body
@@ -66,6 +70,7 @@ function showCalendars(startDate, numDays, country) {
 		    })
 		});
 
+		//A call to get the holidays for this particular country, year and month. (A new call is made for each and every month the function will span)
 		showEvents(country, year, month);
 
 		//Handle month and year increments.
@@ -80,15 +85,16 @@ function showCalendars(startDate, numDays, country) {
 }
 
 function showEvents(country, year, month) { 
-
+	//Make AJAX call to holidayapi.com, passing corresponding data via GET.
 	 $.ajax({
         url: 'http://holidayapi.com/v1/holidays?country=' + country + '&year=' + year + '&month=' + month,
         type: 'get',
         dataType: 'json',
         success: function (data) {
-        	
+        	//Loop holidays array.
         	$(data.holidays).each(function(i, holiday) {
 			    console.log('Got holidayapi for month '+ month + ' data: ' + holiday.name + ' on ' + holiday.date);
+			    //Set the class and title to matchind tds.
 		    	$("#row-"+ holiday.date).attr('title', holiday.name);
 				$("#row-"+ holiday.date).attr('class', 'holiday');
 
