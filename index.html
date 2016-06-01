@@ -71,29 +71,23 @@
  $('#createTables').submit(function(e){
  	e.preventDefault();
 
-	var numDays = 100;
+ 	var date = $('#date').val().split("-");;
+	var days = $('#days').val();
+	var country = $('#country').val();
 
-	var year = 2016;
-	var month = 4;
-	var day = 31;
-
-	var country = "US";
 
 	var allowedCountries = ["BE", "BG", "BR", "CA", "CZ", "DE", "ES", "FR", "GB", "GT", "HR", "IT", "NL", "NO", "PL", "SI", "SK", "US"];
-
 	if ($.inArray(country, allowedCountries) < 0) {
-		alert("Country code not supported by holidayapi");
-		return;
+		alert("Country code not supported by holidayapi. Holidays will not be displayed!");
+		//For now, i'm rendering the calendar even if the country is invalid. If this is not desired, just uncomment next line.
+		//return;
 	}
 
-
-	var startDate = new Date(year, month, day, 0, 0, 0, 0);
-
-	console.log("startDate: " + startDate);
-	console.log("numDays: " + numDays);
+	console.log("date: " + date);
+	console.log("days: " + days);
 	console.log("country: " + country);
 
-	showCalendars(startDate, numDays, country);
+	showCalendars(new Date(date[0], date[1] - 1, date[2]), days, country);
 });
 </script>
 

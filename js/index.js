@@ -1,22 +1,33 @@
+//Main function. This creates calendars according to the challenge.
 function showCalendars(startDate, numDays, country) {
 
-	//The number of days to display.
-	var numdays = 100;
+	//Get and test the STARTING DATE day, month and year.
+	var day = startDate.getUTCDate();
+	var month = startDate.getUTCMonth(); //months from 1-12
+	var year = startDate.getUTCFullYear();
 
-	//Get the finish date.
-	//var newDate = new Date(date.setTime( date.getTime() + days * 86400000 ));
+	//Get the FINISH DATE from the startDate and the numDays.
+	var endDate = new Date();
+	endDate.setTime( startDate.getTime() + numDays * 86400000 )
 
+	//Get the number of months between startDate and endDate.
+	var numMonths = monthDiff(startDate, endDate);
 
-	//The starting date day, month and year.
-	var day = 5;
-	var month = 4;
-	var year = 2016;
+	//Log to check everything is OK.
+	console.log("startDate: "+ startDate);
+	console.log("startDay: "+ day);
+	console.log("startMonth: "+ month);
+	console.log("startYear: "+ year);
+	console.log("- - -");
+	console.log("endDate: "+ endDate);
+	console.log("- - -");
+	console.log("numMonths: "+ numMonths);
 
 	//Select the calendar div on the HTML.
 	var table = d3.select('#calendar');
 
-	//For the number of months the days will span.
-	for (i=0; i<13; i++) {
+	//For the number of months the days will span... A loop will take place, rendering each calendar.
+	for (i=0; i<numMonths; i++) {
 
 		var cal = new Calendar();
 		var weeks = cal.monthDays(year, month);
@@ -81,9 +92,9 @@ function showCalendars(startDate, numDays, country) {
 			year++;	
 		}
 	}
-
 }
 
+//Function to get holidays and show them on calendar.
 function showEvents(country, year, month) { 
 	//Make AJAX call to holidayapi.com, passing corresponding data via GET.
 	 $.ajax({
@@ -101,4 +112,13 @@ function showEvents(country, year, month) {
 			})
         },
     });
+ }
+
+//Helper function to calculate the difference in months between two dates d1 and d2.
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth() + 1; //+1 because i always need to show current month!.
+    return months <= 0 ? 0 : months;
 }
