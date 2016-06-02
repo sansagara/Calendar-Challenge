@@ -30,6 +30,7 @@ All logic is done basically on two files:
 ## Usage:
 
 Just put it on a webserver and :running: it!.
+> It is also available as a github page: http://sansagara.github.io/Calendar-Challenge/
 
 ## To-do:
 
