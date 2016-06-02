@@ -3,10 +3,11 @@
 This is my answer to a front-end programming challenge i got for a development position @prosoft. :computer:
 
 ## Libraries:
-- JQuery: Used for AJAX call to Holidayapi service and changing the cell styles by id.
-- NPM Calendar: Used for getting the weeks and days on a particular month.
-- Bootstrap: Used for general page styling.
-- Bootstrap DateTimePicker: Used for getting the strat date input from the user.
+- [JQuery](https://jquery.com/): Used for AJAX call to Holidayapi service and changing the cell styles by id.
+- [NPM Calendar](https://www.npmjs.com/package/calendar): Used for getting the weeks and days on a particular month.
+- [Bootstrap](http://getbootstrap.com/): Used for general page styling.
+- [Bootstrap DateTimePicker](https://eonasdan.github.io/bootstrap-datetimepicker/): Used for getting the strat date input from the user.
+- [Sweetalert](http://t4t5.github.io/sweetalert/): Used for alerting unsupported country codes.
 
 ## How it works:
 All logic is done basically on two files:
@@ -21,6 +22,11 @@ All logic is done basically on two files:
 
 > Note there is also some custom code for styling the table at `index.css`.
 
+> Note that for holidays that happen to be on invalid days, this is subtly shown as underlines on the day numbers.
+
+##Screenshot:
+![Screenshot with form filled and calendars correctly filled. Notice there are some holidays that happen on invalid days. Those are shown with an underline on the day number.](img/screenshot.png?raw=true "Screenshot")
+
 ## Usage:
 
 Just put it on a webserver and :running: it!.
@@ -28,6 +34,7 @@ Just put it on a webserver and :running: it!.
 ## To-do:
 
 - Make the tables use the default Bootstrap style!.
+- Avoid the AJAX call when country is not supported by holidayapi. (Right now, the request is sent, but i'm handling the exception).
 
 _ _ _
 

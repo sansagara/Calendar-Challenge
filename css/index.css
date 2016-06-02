@@ -24,5 +24,10 @@
 }
 
 #calendar td.invalid {
+   background-color: LightGray
+}
+
+#calendar td.invalid.holiday {
    background-color: LightGray;
+   text-decoration: underline;  /* This style to show that there is a holiday on an invalid day. */
 }

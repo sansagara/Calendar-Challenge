@@ -3,7 +3,7 @@ function showCalendars(startDate, numDays, country) {
 
 	//Get and test the STARTING DATE day, month and year.
 	var day = startDate.getUTCDate();
-	var month = startDate.getUTCMonth(); //months from 1-12
+	var month = startDate.getUTCMonth();
 	var year = startDate.getUTCFullYear();
 
 	//Get the FINISH DATE from the startDate and the numDays.
@@ -15,13 +15,16 @@ function showCalendars(startDate, numDays, country) {
 
 	//Log to check everything is OK.
 	console.log("startDate: "+ startDate);
-	console.log("startDay: "+ day);
-	console.log("startMonth: "+ month);
-	console.log("startYear: "+ year);
+	//console.log("startDay: "+ day);
+	//console//.log("startMonth: "+ month);
+	//console.log("startYear: "+ year);
 	console.log("- - -");
 	console.log("endDate: "+ endDate);
 	console.log("- - -");
 	console.log("numMonths: "+ numMonths);
+	console.log("- - -");
+	console.log("country: "+ country);
+	console.log("- - -");
 
 	//Select the calendar div on the HTML.
 	var table = d3.select('#calendar');
@@ -92,7 +95,13 @@ function showCalendars(startDate, numDays, country) {
 			month = 0;
 			year++;	
 		}
-	}
+	} //end for loop.
+
+	//Set invalid days prior to starting date.
+	setInvalidPrev(startDate);
+
+	//Set invalid days next to finish date.
+	setInvalidFut(endDate);
 }
 
 //Function to get holidays and show them on calendar.
@@ -108,7 +117,7 @@ function showEvents(country, year, month) {
 			    console.log('Got holidayapi for month '+ month + ' data: ' + holiday.name + ' on ' + holiday.date);
 			    //Set the class and title to matchind tds.
 		    	$("#row-"+ holiday.date).attr('title', holiday.name + ' (' + country + ')');
-				$("#row-"+ holiday.date).attr('class', 'holiday');
+				$("#row-"+ holiday.date).addClass('holiday'); //add the class, because day may be invalid, and that haves greater importance.
 
 			})
         },
@@ -125,4 +134,28 @@ function monthDiff(d1, d2) {
     months -= d1.getMonth();
     months += d2.getMonth() + 1; //+1 because i always need to show current month!.
     return months <= 0 ? 0 : months;
+}
+
+//Helper function to set all previous days as invalid on a single month.
+function setInvalidPrev(date) {
+	var day = date.getUTCDate() -1; //-1 so it doesnt include first day.
+	var month = date.getUTCMonth();
+	var year = date.getUTCFullYear();
+
+	for (i=day; i>0; i--) {
+		date = year + '-' + ("0" + month).slice(-2) + '-' + ("0" + i).slice(-2);
+		$("#row-" + date).attr('class', 'invalid');
+	}
+}
+
+//Helper function to set all future days as invalid on a single month.
+function setInvalidFut(date) {
+	var day = date.getUTCDate() +1; //+1 so it doenst include last day.
+	var month = date.getUTCMonth();
+	var year = date.getUTCFullYear();
+
+	for (i=day; i<=31; i++) {
+		date = year + '-' + ("0" + month).slice(-2) + '-' + ("0" + i).slice(-2);
+		$("#row-" + date).attr('class', 'invalid');
+	}
 }
