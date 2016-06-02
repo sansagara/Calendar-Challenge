@@ -39,4 +39,4 @@ Just put it on a webserver and :running: it!.
 
 _ _ _
 
-> &copy; Leonel Atencio
+> &copy; Leonel Atencio. 2016
