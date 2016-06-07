@@ -71,7 +71,7 @@ function showCalendars(startDate, numDays, country) {
 		    .enter()
 		    .append('td')
 		    .attr('id', function (d) {
-		      return 'row-' + year + '-' + ("0" + month).slice(-2) + '-' + ("0" + d).slice(-2);
+		      return 'row-' + year + '-' + ("0" + (month+1)).slice(-2) + '-' + ("0" + d).slice(-2);
 		    })
 		    .attr('class', function (d) {
 		      dayNumber++;
@@ -151,7 +151,7 @@ function setInvalidPrev(date) {
 //Helper function to set all future days as invalid on a single month.
 function setInvalidFut(date) {
 	var day = date.getUTCDate() +1; //+1 so it doenst include last day.
-	var month = date.getUTCMonth();
+	var month = date.getUTCMonth() +1; //+1 to compensate for month starting at 0.
 	var year = date.getUTCFullYear();
 
 	for (i=day; i<=31; i++) {
