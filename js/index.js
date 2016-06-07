@@ -71,7 +71,7 @@ function showCalendars(startDate, numDays, country) {
 		    .enter()
 		    .append('td')
 		    .attr('id', function (d) {
-		      return 'row-' + year + '-' + ("0" + month).slice(-2) + '-' + ("0" + d).slice(-2);
+		      return 'row-' + year + '-' + ("0" + (month+1)).slice(-2) + '-' + ("0" + d).slice(-2);
 		    })
 		    .attr('class', function (d) {
 		      dayNumber++;
