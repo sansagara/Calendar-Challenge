@@ -139,7 +139,7 @@ function monthDiff(d1, d2) {
 //Helper function to set all previous days as invalid on a single month.
 function setInvalidPrev(date) {
 	var day = date.getUTCDate() -1; //-1 so it doesnt include first day.
-	var month = date.getUTCMonth();
+	var month = date.getUTCMonth() +1;
 	var year = date.getUTCFullYear();
 
 	for (i=day; i>0; i--) {
