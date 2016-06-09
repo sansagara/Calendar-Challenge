@@ -108,7 +108,7 @@ function showCalendars(startDate, numDays, country) {
 function showEvents(country, year, month) { 
 	//Make AJAX call to holidayapi.com, passing corresponding data via GET.
 	 $.ajax({
-        url: 'http://holidayapi.com/v1/holidays?country=' + country + '&year=' + year + '&month=' + month,
+        url: 'http://holidayapi.com/v1/holidays?country=' + country + '&year=' + year + '&month=' + (month+1),
         type: 'get',
         dataType: 'json',
         success: function (data) {
@@ -118,8 +118,10 @@ function showEvents(country, year, month) {
 			    //Set the class and title to matchind tds.
 		    	$("#row-"+ holiday.date).attr('title', holiday.name + ' (' + country + ')');
 				$("#row-"+ holiday.date).addClass('holiday'); //add the class, because day may be invalid, and that haves greater importance.
-
-			})
+				$("#row-"+ holiday.date).on('click', function(){
+					swal(country, holiday.name);
+				});
+			}) 
         },
         error: function (jqXHR, textStatus, errorThrown) {
         		console.log('ERROR - holidayapi returned error: '+ textStatus + ". Is country code valid?");
@@ -139,7 +141,7 @@ function monthDiff(d1, d2) {
 //Helper function to set all previous days as invalid on a single month.
 function setInvalidPrev(date) {
 	var day = date.getUTCDate() -1; //-1 so it doesnt include first day.
-	var month = date.getUTCMonth() +1;
+	var month = date.getUTCMonth() +1; //+1 to compensate for month starting at 0.
 	var year = date.getUTCFullYear();
 
 	for (i=day; i>0; i--) {
