@@ -108,7 +108,7 @@ function showCalendars(startDate, numDays, country) {
 function showEvents(country, year, month) { 
 	//Make AJAX call to holidayapi.com, passing corresponding data via GET.
 	 $.ajax({
-        url: 'http://holidayapi.com/v1/holidays?country=' + country + '&year=' + year + '&month=' + (month+1),
+        url: 'https://holidayapi.com/v1/holidays?key=00857d9e-1cc6-4580-b94d-6c3010224de5&country=' + country + '&year=' + year + '&month=' + (month+1),
         type: 'get',
         dataType: 'json',
         success: function (data) {
