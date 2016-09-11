@@ -1,6 +1,7 @@
 # Calendar Challenge
 
 This is my answer to a front-end programming challenge i got for a development position @prosoft. :computer:
+Notice: holidayapi now requires a key for accessing their data. Some modification to the code below is necesary for it to work properly.
 
 ## Libraries:
 - [JQuery](https://jquery.com/): Used for AJAX call to Holidayapi service and changing the cell styles by id.
